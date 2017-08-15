@@ -7,7 +7,7 @@ public class Logic {
 
     int tableSize;
 
-    public TicTacToe (int tableSize) {
+    public Logic (int tableSize) {
         this.tableSize = tableSize;
     }
 
