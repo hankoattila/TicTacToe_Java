@@ -14,26 +14,26 @@ public class Logic {
     public List buildTable() {
 
         List<List> table = new ArrayList<>();
-        List<String> rows = new ArrayList<>();
 
-        for(int j=0; j<tableSize; j++) {
-            rows.add("O");
-        }
+        for (int i = 0; i< tableSize;i++){
 
-        for(int i=0; i<tableSize; i++) {
+            List<String> rows = new ArrayList<>();
+
+            for (int j = 0; j< tableSize;j++){
+                rows.add("O");
+
+            }
             table.add(rows);
         }
+
 
         return table;
     }
 
-    public List selectWithX(List<List> table, int selectedRow, int selectedCol){
+    public void selectWithX(List<List> table, int selectedRow, int selectedCol){
 
         List<String> selRow = table.get(selectedRow);
-
         selRow.set(selectedCol, "X");
-
-        return table;
 
     }
 

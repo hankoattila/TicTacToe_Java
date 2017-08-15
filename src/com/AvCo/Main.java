@@ -8,6 +8,7 @@ public class Main {
     public static void main(String[] args) {
 
         int rowNum, colNum, tableSize;
+        String checker = "";
         Scanner input = new Scanner(System.in);
 
         System.out.print("Select a table size: ");
@@ -18,24 +19,25 @@ public class Main {
         myTable = game.buildTable();
 
 
-        for (int i=0; i<myTable.size(); i++){
+        for (int i = 0; i < myTable.size(); i++) {
             System.out.println(myTable.get(i));
         }
+        while (checker != "Win") {
 
-        System.out.print("Select a row: ");
-        rowNum = input.nextInt();
+            System.out.print("Select a row: ");
+            rowNum = input.nextInt();
 
-        System.out.print("Select a column: ");
-        colNum = input.nextInt();
+            System.out.print("Select a column: ");
+            colNum = input.nextInt();
 
-        List<List> mynewTable = game.selectWithX(myTable, rowNum, colNum);
+            game.selectWithX(myTable, rowNum, colNum);
+            checker = game.checker(myTable, rowNum, colNum, 3);
 
-        for (int j=0; j<myTable.size(); j++){
-            System.out.println(myTable.get(j));
+            for (int j = 0; j < myTable.size(); j++) {
+                System.out.println(myTable.get(j));
+            }
+            System.out.println(checker);
         }
-
-        String checker = game.checker(mynewTable, rowNum, colNum, 3);
-        System.out.println(checker);
 
     }
 }
