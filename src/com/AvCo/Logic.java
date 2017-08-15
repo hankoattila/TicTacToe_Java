@@ -27,4 +27,15 @@ public class Logic {
         return table;
     }
 
+    public List selectWithX(List<List> table, int selectedRow, int selectedCol){
+
+        List<String> selRow = table.get(selectedRow);
+
+        selRow.set(selectedCol, "X");
+
+        return table;
+
+    }
+
+
 }
