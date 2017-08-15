@@ -37,5 +37,20 @@ public class Logic {
 
     }
 
+    public String checkerLoop(String playerSign, List<String> checkedList, int lineLength) {
+
+        int counter = 0;
+
+        for(String field: checkedList) {
+            if(field == playerSign) {
+                counter++;
+                if(counter == lineLength) {
+                    return "Win";
+                }
+            } else {
+                counter = 0;
+            }
+        } return "Continue";
+    }
 
 }
