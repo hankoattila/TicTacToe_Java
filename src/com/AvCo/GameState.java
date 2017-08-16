@@ -1,6 +1,7 @@
 package com.AvCo;
 
 import java.io.*;
+import java.lang.reflect.Array;
 import java.net.URL;
 import java.util.*;
 
@@ -32,33 +33,68 @@ public class GameState {
         return outputFile;
     }
 
-    List<List<String>> readFile() {
-        List<List<String>> strList = new ArrayList<>();
+    List<HashMap<String,String>> readFile() {
+        List<HashMap<String,String>> mapList = new ArrayList<>();
         while (inputFile.hasNext()) {
-            List<String> subList = new ArrayList<>();
+            String[] subList;
             String input = inputFile.nextLine();
-            String[] strArr = input.split(",");
-            for (String elem : strArr) {
-                subList.add(elem);
+            subList = input.split(":");
+            String[] keyArray = {"id","table","player1","player2","nextPlayer"};
+            HashMap<String,String> addNewMap = new HashMap<>();
+            for (int i = 0; i< subList.length; i++){
+                addNewMap.put(keyArray[i],subList[i]);
             }
-            strList.add(subList);
+            mapList.add(addNewMap);
+
         }
-        return strList;
+
+        return mapList;
+    }
+    public List<String> oneDimesionTable(String stringTable){
+        List<String> oneDimensionList = new ArrayList<>();
+        String[] splitedTable = stringTable.split("@");
+        for(String stringRow: splitedTable){
+            String[] splitedRow = stringRow.split(",");
+            for (String field: splitedRow ){
+                oneDimensionList.add(field);
+            }
+
+        }
+        return oneDimensionList;
+    }
+    public List<List<String>> twoDimensionTable(String stringTable){
+        List<List<String>> twoDimensionList = new ArrayList<>();
+        String[] splitedTable = stringTable.split("@");
+        for(String stringRow: splitedTable){
+            String[] splitedRow = stringRow.split(",");
+            List<String> asdf = new ArrayList<>();
+            for (String element: splitedRow){
+                asdf.add(element);
+            }
+
+            twoDimensionList.add(asdf);
+        }
+
+        return twoDimensionList;
     }
 
     void printTable(List<List<String>> table) {
         for (List<String> row : table) {
             String rowString = String.join(" ", row);
-            System.out.println(rowString);
+
         }
     }
 
-    void writeFile(List<List<String>> table) {
+    void writeFile(List<List<String>> table,String player,String player2, String nextPlayer) {
+        String writeString = "0:";
         try {
             for (List<String> row : table) {
-                String rowString = String.join(",", row);
-                outputFile.write(rowString + "\n");
+                writeString += String.join(",", row);
+                writeString += "@";
             }
+            writeString += ':' + player + ':' + player2 + ':' + nextPlayer;
+
+            outputFile.write(writeString);
         } catch (IOException e) {
             System.out.println("IOException: " + e);
         }

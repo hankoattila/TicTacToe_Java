@@ -44,8 +44,10 @@ public class GUI {
         JMenuItem menuItem = new JMenuItem(new AbstractAction("Save") {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
+                String Gergo = "test1";
+                String Attila  = "test2";
                 gameState.openFile(outputFile, "write");
-                gameState.writeFile(table);
+                gameState.writeFile(table,Gergo,Attila,"test2");
                 gameState.closeFile(gameState.getOutputFile());
                 System.out.println("Yeaaa!");
             }

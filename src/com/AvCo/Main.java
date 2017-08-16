@@ -1,5 +1,6 @@
 package com.AvCo;
 
+import java.util.HashMap;
 import java.util.List;
 //import java.util.Scanner;
 import javax.swing.*;
@@ -28,21 +29,24 @@ public class Main {
             tableSize = 6;
             lineLength = 5;
         }
-        List<List<String>> myTable;
         Logic game = new Logic(tableSize);
+        GameState gameState = new GameState();
+        List<List<String>> myTable;
         myTable = game.buildTable();
+        String filename1 = "test.txt";
+        gameState.openFile(filename1, "read");
+        List<HashMap<String,String>> table;
+        table = gameState.readFile();
+        gameState.closeFile(gameState.getInputFile());
+        //myTable = gameState.twoDimensionTable(table.get(0).get("table"));
+        System.out.println(myTable);
 
-	    new GUI(tableSize, myTable, lineLength);
+
+        new GUI(tableSize, myTable, lineLength);
 
 
-//        GameState gameState = new GameState();
-//        String filename1 = "test.txt";
-//        List<List<String>> table;
 
-//        gameState.openFile(filename1, "read");
-//        table = gameState.readFile();
-//        gameState.printTable(table);
-//        gameState.closeFile(gameState.getInputFile());
+
 
 //        System.out.println();
 //
