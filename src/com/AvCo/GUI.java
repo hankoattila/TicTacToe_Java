@@ -14,8 +14,10 @@ public class GUI {
     List<List<String>> table = new ArrayList<>();
     GameState gameState = new GameState();
     String outputFile = "testWrite.txt";
+    ImageIcon X = new ImageIcon(this.getClass().getResource("XO_1.png"));
+    ImageIcon O = new ImageIcon(this.getClass().getResource("XO_2.png"));
 
-    public GUI(int tableSize, List<List<String>> table, int lineLength) {
+    public GUI(int tableSize, List<List<String>> table, int lineLength, List<String> loadTable) {
 
         this.tableSize = tableSize;
         this.table = table;
@@ -52,17 +54,25 @@ public class GUI {
                 System.out.println("Yeaaa!");
             }
         });
-
         menu.add(menuItem);
         window.setSize(tableSize*120, tableSize*120);
         panel.setLayout(new GridLayout(tableSize,tableSize));
         XOButton[] buttons = new XOButton[(tableSize*tableSize)];
         window.setResizable(false);
-
         for (int i = 0; i < (tableSize*tableSize); i++) {
             buttons[i] = new XOButton(position[i], tableSize, table, lineLength);
+
+                if (loadTable.get(i).equals("X")){
+                    buttons[i].setIcon(X);
+
+                }
+                else if (loadTable.get(i).equals("O")){
+                    buttons[i].setIcon(O);
+
+                }
             panel.add(buttons[i]);
         }
+
         menuBar.add(menu);
         window.add(panel);
         window.setJMenuBar(menuBar);

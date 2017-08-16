@@ -1,5 +1,6 @@
 package com.AvCo;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 //import java.util.Scanner;
@@ -12,9 +13,12 @@ public class Main {
 
         int tableSize = 0;
         int lineLength = 0;
+        int choice;
+
+
 
         Object[] val = {"Small","Medium"};
-        int choice = JOptionPane.showOptionDialog(null,
+        choice = JOptionPane.showOptionDialog(null,
                 "Please select a table size!",
                 "Choose an option",
                 JOptionPane.YES_NO_OPTION,
@@ -32,7 +36,7 @@ public class Main {
         } else {
             System.exit(0);
         }
-        Logic game = new Logic(tableSize);
+        Logic game = new Logic(tableSize,lineLength);
         GameState gameState = new GameState();
         List<List<String>> myTable;
         myTable = game.buildTable();
@@ -41,25 +45,13 @@ public class Main {
         List<HashMap<String,String>> table;
         table = gameState.readFile();
         gameState.closeFile(gameState.getInputFile());
-        //myTable = gameState.twoDimensionTable(table.get(0).get("table"));
-        System.out.println(myTable);
-
-
-        new GUI(tableSize, myTable, lineLength);
-
+        myTable = gameState.twoDimensionTable(table.get(0).get("table"));
+        List<String> loadTable;
+        loadTable = gameState.oneDimesionTable(table.get(0).get("table"));
 
 
 
 
-//        System.out.println();
-//
-//        String filename2 = "testWrite.txt";
-//        int tableSize = 4;
-//        table = gameState.buildRandomTable(tableSize);
-//        gameState.printTable(table);
-//        gameState.openFile(filename2, "write");
-//        gameState.writeFile(table);
-//        gameState.closeFile(gameState.getOutputFile());
-
+        new GUI(tableSize, myTable, lineLength, loadTable);
     }
 }

@@ -1,2 +1,1 @@
-0:X,,|,,|,,X|:Gergo:Attila:Gergo
-1:X,O,X@O,X,O@X,O,X:Mate:Peter:Peter
+0:;;@;;@;;:test1:test2:test2

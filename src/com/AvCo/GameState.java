@@ -64,17 +64,16 @@ public class GameState {
     }
     public List<List<String>> twoDimensionTable(String stringTable){
         List<List<String>> twoDimensionList = new ArrayList<>();
-        String[] splitedTable = stringTable.split("@");
-        for(String stringRow: splitedTable){
-            String[] splitedRow = stringRow.split(",");
-            List<String> asdf = new ArrayList<>();
-            for (String element: splitedRow){
-                asdf.add(element);
-            }
+        String[] splitedArray = stringTable.split("@");
+        for (int i = 0; i< splitedArray.length;i++){
+                String[] newArray = splitedArray[i].split(",");
+                List<String> addNew = new ArrayList<>();
+                for (int j = 0; j<newArray.length;j++){
+                    addNew.add(newArray[j]);
+                }
+                twoDimensionList.add(addNew);
 
-            twoDimensionList.add(asdf);
         }
-
         return twoDimensionList;
     }
 
@@ -88,8 +87,9 @@ public class GameState {
     void writeFile(List<List<String>> table,String player,String player2, String nextPlayer) {
         String writeString = "0:";
         try {
+
             for (List<String> row : table) {
-                writeString += String.join(",", row);
+                writeString += String.join("$", row);
                 writeString += "@";
             }
             writeString += ':' + player + ':' + player2 + ':' + nextPlayer;
