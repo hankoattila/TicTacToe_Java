@@ -5,6 +5,8 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class GUI {
 
@@ -30,21 +32,34 @@ public class GUI {
             }
         }
 
-        System.out.println(Arrays.toString(position));
 
         XOButton[] buttons = new XOButton[9];
         JFrame window = new JFrame("Tic-Tac-Toe");
-        window.setSize(500, 500);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        window.setResizable(false);
         JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(3,3));
-        for (int i = 0; i < 9; i++) {
+        JMenuBar menuBar = new JMenuBar();
+        JMenu menu;
+        menu = new JMenu("Menu");
+        JMenuItem menuItem = new JMenuItem(new AbstractAction("Save") {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                System.out.println("Yeaaa!");
+            }
+        });
+
+        menu.add(menuItem);
+        window.setSize(size*150, size*150);
+        panel.setLayout(new GridLayout(size,size));
+        XOButton[] buttons = new XOButton[(size*size)];
+        window.setResizable(false);
+
+        for (int i = 0; i < (size*size); i++) {
             buttons[i] = new XOButton(position[i], tableSize, table, lineLength);
             panel.add(buttons[i]);
         }
+        menuBar.add(menu);
         window.add(panel);
+        window.setJMenuBar(menuBar);
         window.setVisible(true);
     }
 }

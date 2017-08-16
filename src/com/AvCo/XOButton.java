@@ -17,7 +17,7 @@ public class XOButton extends JButton implements ActionListener {
     public XOButton(String name, int tableSize, List<List<String>> table, int lineLength) {
         X = new ImageIcon(this.getClass().getResource("XO_1.png"));
         O = new ImageIcon(this.getClass().getResource("XO_2.png"));
-        this.setName(name);
+        //this.setName(name);
         this.addActionListener(this);
         this.tableSize = tableSize;
         this.table = table;
