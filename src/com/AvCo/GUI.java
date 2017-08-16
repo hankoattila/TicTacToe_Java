@@ -47,7 +47,7 @@ public class GUI {
         });
 
         menu.add(menuItem);
-        window.setSize(tableSize*130, tableSize*130);
+        window.setSize(tableSize*120, tableSize*120);
         panel.setLayout(new GridLayout(tableSize,tableSize));
         XOButton[] buttons = new XOButton[(tableSize*tableSize)];
         window.setResizable(false);
