@@ -10,10 +10,10 @@ public class XOButton extends JButton implements ActionListener {
     public static int player = 1;
     int empty = 0;
 
-    public XOButton(String name) {
+    public XOButton() {
         X = new ImageIcon(this.getClass().getResource("XO_1.png"));
         O = new ImageIcon(this.getClass().getResource("XO_2.png"));
-        this.setName(name);
+        //this.setName(name);
         this.addActionListener(this);
     }
 
