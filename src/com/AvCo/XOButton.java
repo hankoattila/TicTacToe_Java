@@ -40,7 +40,6 @@ public class XOButton extends JButton implements ActionListener {
             int rowNum, colNum;
             rowNum = Integer.parseInt(String.valueOf(selectedField.charAt(0)));
             colNum = Integer.parseInt(String.valueOf(selectedField.charAt(1)));
-            System.out.print(rowNum);
             String sign;
             if(player == 1) {
                 sign = "O";
@@ -51,7 +50,7 @@ public class XOButton extends JButton implements ActionListener {
             }
 
             Logic checker = new Logic(tableSize);
-            System.out.println(checker.checker(table, rowNum, colNum, lineLength, sign));
+            checker.checker(table, rowNum, colNum, lineLength, sign);
 
         }
         empty++;

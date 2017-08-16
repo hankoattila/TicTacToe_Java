@@ -34,7 +34,6 @@ public class Logic {
 
         List<String> selRow = table.get(selectedRow);
         selRow.set(selectedCol, sign);
-        System.out.println(selRow);
 
     }
 

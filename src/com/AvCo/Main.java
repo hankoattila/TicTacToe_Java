@@ -33,9 +33,5 @@ public class Main {
 
 	    new GUI(tableSize, myTable, lineLength);
 
-        for (int i = 0; i < myTable.size(); i++) {
-            System.out.println(myTable.get(i));
-        }
-
     }
 }
