@@ -8,7 +8,8 @@ public class Main {
 
     public static void main(String[] args) {
 
-        int tableSize, lineLength;
+        int tableSize = 0;
+        int lineLength = 0;
 
         Object[] val = {"Small","Medium"};
         int choice = JOptionPane.showOptionDialog(null,
@@ -23,15 +24,16 @@ public class Main {
         if (choice == JOptionPane.YES_OPTION) {
             tableSize = 3;
             lineLength = 3;
-        } else {
+        } else if (choice == JOptionPane.NO_OPTION) {
             tableSize = 6;
             lineLength = 5;
+        } else {
+            System.exit(0);
         }
         List<List<String>> myTable;
         Logic game = new Logic(tableSize);
         myTable = game.buildTable();
 
 	    new GUI(tableSize, myTable, lineLength);
-
     }
 }

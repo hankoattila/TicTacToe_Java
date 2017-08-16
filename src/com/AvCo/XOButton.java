@@ -50,8 +50,14 @@ public class XOButton extends JButton implements ActionListener {
             }
 
             Logic checker = new Logic(tableSize);
-            checker.checker(table, rowNum, colNum, lineLength, sign);
-
+            String value = checker.checker(table, rowNum, colNum, lineLength, sign);
+            if (value == "Win") {
+                JOptionPane.showMessageDialog(null, "The Winner is: player " + player);
+                System.exit(0);
+            } else if (value == "GameOver") {
+                JOptionPane.showMessageDialog(null, "Shame it's a tie!");
+                System.exit(0);
+            }
         }
         empty++;
     }

@@ -101,7 +101,7 @@ public class Logic {
         } else if(checkEmptyFieldsExist(table)){
             return "Continue";
         } else {
-            return "Game over";
+            return "GameOver";
         }
     }
 
