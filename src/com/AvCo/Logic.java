@@ -98,37 +98,41 @@ public class Logic {
 
         if(resultOfColumn == "Win" || resultOfRow == "Win" || resultOfCrossDown == "Win" || resultOfCrossUp == "Win"){
             return "Win";
-        } else {
+        } else if(checkEmptyFieldsExist(table)){
             return "Continue";
+        } else {
+            return "Game over";
         }
     }
 
     public String checkerLoop(String playerSign, List<String> checkedList, int lineLength) {
 
         int counter = 0;
-        String emptyField = "";
-        String result = "Continue";
-        boolean isThereEmptyField = false;
 
         for(String field: checkedList) {
             if(field == playerSign) {
                 counter++;
                 if(counter == lineLength) {
-                    result = "Win";
-                    return result;
+                    return "Win";
                 }
-            } else if (field == emptyField){
-                counter = 0;
-                isThereEmptyField = true;
             } else {
                 counter = 0;
             }
-        } if(isThereEmptyField == true) {
-            return result;
-        }else {
-            result = "Game over";
-            return result;
-        }
+        } return "Continue";
+    }
+
+    public boolean checkEmptyFieldsExist(List<List<String>> table) {
+
+        String emptyField = "";
+        boolean isThereEmptyField = false;
+
+        for (List<String> row: table) {
+            for (String field: row){
+                if(field == emptyField){
+                    isThereEmptyField = true;
+                }
+            }
+        } return isThereEmptyField;
     }
 
 }
