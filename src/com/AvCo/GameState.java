@@ -21,6 +21,10 @@ public class GameState {
         }
     }
 
+    Scanner getInputFile() {
+        return inputFile;
+    }
+
     List<List<String>> readFile() {
         List<List<String>> strList = new ArrayList<>();
         while (inputFile.hasNext()) {
@@ -42,4 +46,7 @@ public class GameState {
         }
     }
 
+    void closeFile(Scanner inputFile) {
+        inputFile.close();
+    }
 }

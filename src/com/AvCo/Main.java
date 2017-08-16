@@ -12,5 +12,6 @@ public class Main {
         gameState.openFile(filename1, "read");
         table = gameState.readFile();
         gameState.printTable(table);
+        gameState.closeFile(gameState.getInputFile());
     }
 }
