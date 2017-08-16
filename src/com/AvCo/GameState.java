@@ -34,4 +34,12 @@ public class GameState {
         }
         return strList;
     }
+
+    void printTable(List<List<String>> table) {
+        for (List<String> row : table) {
+            String rowString = String.join(" ", row);
+            System.out.println(rowString);
+        }
+    }
+
 }
