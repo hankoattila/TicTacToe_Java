@@ -13,14 +13,14 @@ public class Logic {
 
     public List buildTable() {
 
-        List<List> table = new ArrayList<>();
+        List<List<String>> table = new ArrayList<>();
 
         for (int i = 0; i< tableSize;i++){
 
             List<String> rows = new ArrayList<>();
 
             for (int j = 0; j< tableSize;j++){
-                rows.add("O");
+                rows.add("");
 
             }
             table.add(rows);
@@ -30,28 +30,31 @@ public class Logic {
         return table;
     }
 
-    public void selectWithX(List<List> table, int selectedRow, int selectedCol){
+    public void selectField(List<List<String>> table, int selectedRow, int selectedCol, String sign){
 
         List<String> selRow = table.get(selectedRow);
-        selRow.set(selectedCol, "X");
+        selRow.set(selectedCol, sign);
+        System.out.println(selRow);
 
     }
 
-    public String checker(List<List> table, int rowNum, int colNum, int lineLength) {
+    public String checker(List<List<String>> table, int rowNum, int colNum, int lineLength, String sign) {
+
+        selectField(table, rowNum, colNum, sign);
 
         List<String> selectedRow;
         List<String> selectedColumn = new ArrayList<>();
         List<String> crossDown = new ArrayList<>();
         List<String> crossUp = new ArrayList<>();
         int crossUpStartRow, crossUpStartCol, crossDownStartCol, crossDownStartRow;
-        String playerSign = (String) table.get(rowNum).get(colNum);
+        String playerSign = table.get(rowNum).get(colNum);
 
         // Selected Row
         selectedRow = table.get(rowNum);
 
         // Selected Column
         for (int i=0; i<table.size(); i++) {
-            selectedColumn.add((String) table.get(i).get(colNum));
+            selectedColumn.add((table.get(i).get(colNum)));
         }
 
         //Selected Cross Down
@@ -59,14 +62,14 @@ public class Logic {
             crossDownStartCol = colNum-rowNum;
             int countForRow = 0;
             for (int i=crossDownStartCol; i<table.size(); i++) {
-                crossDown.add((String) table.get(countForRow).get(i));
+                crossDown.add(table.get(countForRow).get(i));
                 countForRow++;
             }
         } else {
             crossDownStartRow = rowNum-colNum;
             int countForCol = 0;
             for (int i=crossDownStartRow; i<table.size(); i++) {
-                crossDown.add((String) table.get(i).get(countForCol));
+                crossDown.add(table.get(i).get(countForCol));
                 countForCol++;
             }
         }
@@ -76,14 +79,14 @@ public class Logic {
             crossUpStartRow = colNum + rowNum;
             int countCol = 0;
             for (int i=crossUpStartRow; i>=0; i--) {
-                crossUp.add((String) table.get(i).get(countCol));
+                crossUp.add(table.get(i).get(countCol));
                 countCol++;
             }
         } else {
             crossUpStartCol = colNum - (table.size() - rowNum - 1);
             int countForRow = table.size() - 1;
             for (int i=crossUpStartCol; i<table.size(); i++) {
-                crossUp.add((String) table.get(countForRow).get(i));
+                crossUp.add(table.get(countForRow).get(i));
                 countForRow--;
             }
         }
