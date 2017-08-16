@@ -33,7 +33,6 @@ public class GUI {
         }
 
 
-        XOButton[] buttons = new XOButton[9];
         JFrame window = new JFrame("Tic-Tac-Toe");
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         JPanel panel = new JPanel();
@@ -48,12 +47,12 @@ public class GUI {
         });
 
         menu.add(menuItem);
-        window.setSize(size*150, size*150);
-        panel.setLayout(new GridLayout(size,size));
-        XOButton[] buttons = new XOButton[(size*size)];
+        window.setSize(tableSize*130, tableSize*130);
+        panel.setLayout(new GridLayout(tableSize,tableSize));
+        XOButton[] buttons = new XOButton[(tableSize*tableSize)];
         window.setResizable(false);
 
-        for (int i = 0; i < (size*size); i++) {
+        for (int i = 0; i < (tableSize*tableSize); i++) {
             buttons[i] = new XOButton(position[i], tableSize, table, lineLength);
             panel.add(buttons[i]);
         }

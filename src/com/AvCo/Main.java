@@ -8,10 +8,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        int rowNum, colNum, tableSize, lineLength;
-        String checker = "";
-        Scanner input = new Scanner(System.in);
-
+        int tableSize, lineLength;
 
         Object[] val = {"Small","Medium"};
         int choice = JOptionPane.showOptionDialog(null,
@@ -28,12 +25,11 @@ public class Main {
             lineLength = 3;
         } else {
             tableSize = 6;
-            lineLength = 6;
+            lineLength = 5;
         }
         List<List<String>> myTable;
         Logic game = new Logic(tableSize);
         myTable = game.buildTable();
-        new GUI(tableSize);
 
 	    new GUI(tableSize, myTable, lineLength);
 
