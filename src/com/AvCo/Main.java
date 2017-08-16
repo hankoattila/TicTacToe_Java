@@ -1,7 +1,6 @@
 package com.AvCo;
 
 import java.util.List;
-import java.util.Scanner;
 import javax.swing.*;
 
 public class Main {
@@ -30,10 +29,11 @@ public class Main {
         } else {
             System.exit(0);
         }
-        List<List<String>> myTable;
-        Logic game = new Logic(tableSize);
-        myTable = game.buildTable();
+
+        Logic game = new Logic(tableSize, lineLength);
+        List<List<String>> myTable = game.buildTable();
 
 	    new GUI(tableSize, myTable, lineLength);
+
     }
 }

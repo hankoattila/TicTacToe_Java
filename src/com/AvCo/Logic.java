@@ -3,41 +3,42 @@ package com.AvCo;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Logic {
+class Logic {
+    
+    private int tableSize;
+    private int lineLength;
 
-    int tableSize;
-
-    public Logic (int tableSize) {
+    Logic (int tableSize, int lineLength) {
         this.tableSize = tableSize;
+        this.lineLength = lineLength;
     }
-
-    public List buildTable() {
+    
+    
+    
+    List<List<String>> buildTable() {
 
         List<List<String>> table = new ArrayList<>();
+        String emptyFields = "";
 
-        for (int i = 0; i< tableSize;i++){
-
+        for (int i=0; i<tableSize; i++){
             List<String> rows = new ArrayList<>();
-
             for (int j = 0; j< tableSize;j++){
-                rows.add("");
-
+                rows.add(emptyFields);
             }
             table.add(rows);
         }
 
-
         return table;
     }
 
-    public void selectField(List<List<String>> table, int selectedRow, int selectedCol, String sign){
+    private void selectField(List<List<String>> table, int selectedFieldRowNum, int selectedFieldColNum, String sign){
 
-        List<String> selRow = table.get(selectedRow);
-        selRow.set(selectedCol, sign);
+        List<String> selRow = table.get(selectedFieldRowNum);
+        selRow.set(selectedFieldColNum, sign);
 
     }
 
-    public String checker(List<List<String>> table, int rowNum, int colNum, int lineLength, String sign) {
+    String checker(List<List<String>> table, int rowNum, int colNum, String sign) {
 
         selectField(table, rowNum, colNum, sign);
 
@@ -52,12 +53,12 @@ public class Logic {
         selectedRow = table.get(rowNum);
 
         // Selected Column
-        for (int i=0; i<table.size(); i++) {
-            selectedColumn.add((table.get(i).get(colNum)));
+        for (List<String> row: table) {
+            selectedColumn.add((row.get(colNum)));
         }
 
         //Selected Cross Down
-        if(rowNum < colNum){
+        if (rowNum < colNum){
             crossDownStartCol = colNum-rowNum;
             int countForRow = 0;
             for (int i=crossDownStartCol; i<table.size(); i++) {
@@ -91,10 +92,10 @@ public class Logic {
         }
 
         // Check the four way
-        String resultOfRow = checkerLoop(playerSign, selectedRow, lineLength);
-        String resultOfColumn = checkerLoop(playerSign, selectedColumn, lineLength);
-        String resultOfCrossDown = checkerLoop(playerSign, crossDown, lineLength);
-        String resultOfCrossUp = checkerLoop(playerSign, crossUp, lineLength);
+        String resultOfRow = rowChecker(playerSign, selectedRow);
+        String resultOfColumn = rowChecker(playerSign, selectedColumn);
+        String resultOfCrossDown = rowChecker(playerSign, crossDown);
+        String resultOfCrossUp = rowChecker(playerSign, crossUp);
 
         if(resultOfColumn == "Win" || resultOfRow == "Win" || resultOfCrossDown == "Win" || resultOfCrossUp == "Win"){
             return "Win";
@@ -103,36 +104,39 @@ public class Logic {
         } else {
             return "GameOver";
         }
+
     }
 
-    public String checkerLoop(String playerSign, List<String> checkedList, int lineLength) {
+    private String rowChecker(String playerSign, List<String> checkedList) {
 
         int counter = 0;
 
-        for(String field: checkedList) {
-            if(field == playerSign) {
+        for (String field: checkedList) {
+            if (field == playerSign) {
                 counter++;
-                if(counter == lineLength) {
+                if (counter == lineLength) {
                     return "Win";
                 }
             } else {
                 counter = 0;
             }
         } return "Continue";
+
     }
 
-    public boolean checkEmptyFieldsExist(List<List<String>> table) {
+    private boolean checkEmptyFieldsExist(List<List<String>> table) {
 
         String emptyField = "";
         boolean isThereEmptyField = false;
 
         for (List<String> row: table) {
             for (String field: row){
-                if(field == emptyField){
+                if (field == emptyField){
                     isThereEmptyField = true;
                 }
             }
         } return isThereEmptyField;
+
     }
 
 }

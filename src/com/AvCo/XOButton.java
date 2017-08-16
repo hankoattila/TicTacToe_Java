@@ -49,9 +49,10 @@ public class XOButton extends JButton implements ActionListener {
                 sign = "";
             }
 
-            Logic checker = new Logic(tableSize);
-            String value = checker.checker(table, rowNum, colNum, lineLength, sign);
+            Logic checker = new Logic(tableSize, lineLength);
+            String value = checker.checker(table, rowNum, colNum, sign);
             if (value == "Win") {
+                player = player == 1 ? 2:1;
                 JOptionPane.showMessageDialog(null, "The Winner is: player " + player);
                 System.exit(0);
             } else if (value == "GameOver") {
