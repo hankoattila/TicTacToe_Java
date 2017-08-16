@@ -106,17 +106,29 @@ public class Logic {
     public String checkerLoop(String playerSign, List<String> checkedList, int lineLength) {
 
         int counter = 0;
+        String emptyField = "";
+        String result = "Continue";
+        boolean isThereEmptyField = false;
 
         for(String field: checkedList) {
             if(field == playerSign) {
                 counter++;
                 if(counter == lineLength) {
-                    return "Win";
+                    result = "Win";
+                    return result;
                 }
+            } else if (field == emptyField){
+                counter = 0;
+                isThereEmptyField = true;
             } else {
                 counter = 0;
             }
-        } return "Continue";
+        } if(isThereEmptyField == true) {
+            return result;
+        }else {
+            result = "Game over";
+            return result;
+        }
     }
 
 }
