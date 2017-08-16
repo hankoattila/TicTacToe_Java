@@ -7,6 +7,7 @@ import java.util.*;
 public class GameState {
 
     private Scanner inputFile = null;
+    private BufferedWriter outputFile = null;
 
     void openFile(String filename, String operation) {
         filename = "/files/" + filename;
@@ -15,6 +16,8 @@ public class GameState {
         try {
             if (operation.equals("read")) {
                 inputFile = new Scanner(new BufferedReader(new FileReader(filename)));
+            } else if (operation.equals("write")) {
+                outputFile = new BufferedWriter(new FileWriter(filename));
             }
         } catch (Exception e) {
             e.getStackTrace();
@@ -23,6 +26,10 @@ public class GameState {
 
     Scanner getInputFile() {
         return inputFile;
+    }
+
+    BufferedWriter getOutputFile() {
+        return outputFile;
     }
 
     List<List<String>> readFile() {
@@ -46,7 +53,54 @@ public class GameState {
         }
     }
 
+    void writeFile(List<List<String>> table) {
+        try {
+            for (List<String> row : table) {
+                String rowString = String.join(",", row);
+                outputFile.write(rowString + "\n");
+            }
+        } catch (IOException e) {
+            System.out.println("IOException: " + e);
+        }
+    }
+
+    List<List<String>> buildRandomTable(int tableSize) {
+        List<List<String>> table = new ArrayList<>();
+
+        for (int i = 0; i < tableSize; i++) {
+            List<String> rows = new ArrayList<>();
+            Random random = new Random();
+            String cell = null;
+
+            for (int j = 0; j < tableSize; j++) {
+                int randomInt = random.nextInt(3);
+                switch (randomInt) {
+                    case 0:
+                        cell = "-";
+                        break;
+                    case 1:
+                        cell = "O";
+                        break;
+                    case 2:
+                        cell = "X";
+                        break;
+                }
+                rows.add(cell);
+            }
+            table.add(rows);
+        }
+        return table;
+    }
+
     void closeFile(Scanner inputFile) {
         inputFile.close();
+    }
+
+    void closeFile(BufferedWriter outputFile) {
+        try {
+            outputFile.close();
+        } catch (IOException e) {
+            System.out.println("IOException: " + e);
+        }
     }
 }
