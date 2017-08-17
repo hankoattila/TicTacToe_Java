@@ -1,11 +1,8 @@
 package com.AvCo;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-//import java.util.Scanner;
 import javax.swing.*;
-
 
 public class Main {
 
@@ -16,8 +13,7 @@ public class Main {
         int choice;
 
 
-
-        Object[] val = {"Small","Medium"};
+        Object[] val = {"Small", "Medium"};
         choice = JOptionPane.showOptionDialog(null,
                 "Please select a table size!",
                 "Choose an option",
@@ -36,20 +32,19 @@ public class Main {
         } else {
             System.exit(0);
         }
-        Logic game = new Logic(tableSize,lineLength);
+        Logic game = new Logic(tableSize, lineLength);
         GameState gameState = new GameState();
         List<List<String>> myTable;
         myTable = game.buildTable();
         String filename1 = "test.txt";
         gameState.openFile(filename1, "read");
-        List<HashMap<String,String>> table;
+        List<HashMap<String, String>> table;
         table = gameState.readFile();
+        XOButton.player = Integer.parseInt(table.get(0).get("nextPlayer"));
         gameState.closeFile(gameState.getInputFile());
         myTable = gameState.twoDimensionTable(table.get(0).get("table"));
         List<String> loadTable;
         loadTable = gameState.oneDimesionTable(table.get(0).get("table"));
-
-
 
 
         new GUI(tableSize, myTable, lineLength, loadTable);

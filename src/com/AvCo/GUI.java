@@ -3,10 +3,8 @@ package com.AvCo;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class GUI {
 
@@ -27,8 +25,8 @@ public class GUI {
         int rowIndex, colIndex;
         int counter = 0;
 
-        for(int i=0; i<tableSize; i++) {
-            for(int j=0; j<tableSize; j++) {
+        for (int i = 0; i < tableSize; i++) {
+            for (int j = 0; j < tableSize; j++) {
                 rowIndex = i;
                 colIndex = j;
                 position[counter] = String.valueOf(rowIndex) + String.valueOf(colIndex);
@@ -47,29 +45,30 @@ public class GUI {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 String Gergo = "test1";
-                String Attila  = "test2";
+                String Attila = "test2";
+                int nextPlayer = XOButton.player;
                 gameState.openFile(outputFile, "write");
-                gameState.writeFile(table,Gergo,Attila,"test2");
+                gameState.writeFile(table, Gergo, Attila, nextPlayer);
                 gameState.closeFile(gameState.getOutputFile());
-                System.out.println("Yeaaa!");
             }
         });
         menu.add(menuItem);
-        window.setSize(tableSize*120, tableSize*120);
-        panel.setLayout(new GridLayout(tableSize,tableSize));
-        XOButton[] buttons = new XOButton[(tableSize*tableSize)];
+        window.setSize(tableSize * 120, tableSize * 120);
+        panel.setLayout(new GridLayout(tableSize, tableSize));
+        XOButton[] buttons = new XOButton[(tableSize * tableSize)];
         window.setResizable(false);
-        for (int i = 0; i < (tableSize*tableSize); i++) {
+        for (int i = 0; i < (tableSize * tableSize); i++) {
             buttons[i] = new XOButton(position[i], tableSize, table, lineLength);
+            buttons[i].empty = 1;
+            if (loadTable.get(i).equals("X")) {
+                buttons[i].setIcon(X);
 
-                if (loadTable.get(i).equals("X")){
-                    buttons[i].setIcon(X);
-
-                }
-                else if (loadTable.get(i).equals("O")){
-                    buttons[i].setIcon(O);
-
-                }
+            } else if (loadTable.get(i).equals("O")) {
+                buttons[i].setIcon(O);
+            //
+            } else {
+                buttons[i].empty = 0;
+            }
             panel.add(buttons[i]);
         }
 
