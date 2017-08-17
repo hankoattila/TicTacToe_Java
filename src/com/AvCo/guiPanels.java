@@ -3,6 +3,7 @@ package com.AvCo;
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.awt.Dimension;
 
 public class guiPanels {
 
@@ -14,11 +15,11 @@ public class guiPanels {
         String[] high = new String[]{"Bela Katana", "Juci Nyaralo", "Apu Veddmeg"};
         String score = "<html>High score: <br><br>";
         for (String name: high) {
-            score = score + name + "<br>";
+            score = score + "\uD83C\uDFC6 " + name + "--> 12" + "<br>";
         }
 
-        JTextField xField = new JTextField(8);
-        JTextField yField = new JTextField(8);
+        JTextField xField = new JTextField(5);
+        JTextField yField = new JTextField(5);
         JLabel jlabel = new JLabel(score);
         JPanel myPanel = new JPanel();
         myPanel.add(new JLabel("Name 1: "));
@@ -31,7 +32,7 @@ public class guiPanels {
         myPanel.add(jlabel);
         String panelString = "Please enter your names.";
 
-        while (name1.isEmpty() || name2.isEmpty()) {
+        while ((name1.isEmpty() || name2.isEmpty()) || name1.equals(name2)) {
             int result = JOptionPane.showConfirmDialog(null, myPanel,
                     panelString, JOptionPane.OK_CANCEL_OPTION);
             if (result == JOptionPane.OK_OPTION) {
@@ -40,7 +41,7 @@ public class guiPanels {
             } else {
                 System.exit(0);
             }
-            panelString = "Please fill out both fields";
+            panelString = "Use both fields & diff names.";
         }
         names.add(name1);
         names.add(name2);
