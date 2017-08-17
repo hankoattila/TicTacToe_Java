@@ -17,6 +17,7 @@ public class XOButton extends JButton implements ActionListener {
     HashMap<Integer, String> playersNames = new HashMap<>();
     String player1, player2;
 
+
     public XOButton(String name, int tableSize, List<List<String>> table, int lineLength, String player1, String player2) {
         X = new ImageIcon(this.getClass().getResource("XO_1.png"));
         O = new ImageIcon(this.getClass().getResource("XO_2.png"));
@@ -60,6 +61,14 @@ public class XOButton extends JButton implements ActionListener {
                 playersNames.put(1, player1);
                 playersNames.put(2, player2);
                 player = player == 1 ? 2:1;
+                GameState gameState = new GameState();
+                gameState.openFile("highScore.txt", "read");
+                HashMap<String,Integer> highScore = new HashMap<>(gameState.readHighScore());
+                gameState.closeFile(gameState.getInputFile());
+                gameState.openFile("highScore.txt", "write");
+                System.out.println(highScore);
+                gameState.writeHighScore(playersNames.get(player),highScore);
+                gameState.closeFile(gameState.getOutputFile());
 
                 JOptionPane.showMessageDialog(null, "The Winner is: " + playersNames.get(player));
                 System.exit(0);

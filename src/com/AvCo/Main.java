@@ -35,6 +35,7 @@ public class Main {
             loadTable = gameState.oneDimensionTable(table.get(0).get("table"));
         }
 
+
         HashMap<String, Integer> highScore = new HashMap<>();
         highScore.put("Peter", 4);
         String name = "Gergo";

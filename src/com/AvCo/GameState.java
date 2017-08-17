@@ -24,10 +24,14 @@ public class GameState {
 
                 // New input for writing
                 inputFile = new Scanner(new BufferedReader(new FileReader(filename)));
-                if (numOfSavedGames != 0) {
-                    outputFile = new BufferedWriter(new FileWriter(filename, true));
-                } else {
+                if (filename.contains("highScore.txt")){
                     outputFile = new BufferedWriter(new FileWriter(filename));
+                } else {
+                    if(numOfSavedGames != 0) {
+                        outputFile = new BufferedWriter(new FileWriter(filename, true));
+                    } else {
+                        outputFile = new BufferedWriter(new FileWriter(filename));
+                    }
                 }
                 closeFile(inputFile);
             }
@@ -104,6 +108,36 @@ public class GameState {
         } catch (IOException e) {
             System.out.println("IOException: " + e);
         }
+    }
+    void writeHighScore(String name, HashMap<String,Integer> highScore){
+        if (!highScore.containsKey(name)){
+            highScore.put(name,1);
+        } else {
+            highScore.put(name,highScore.get(name)+1);
+        }
+        String concatString = "";
+        for (String key: highScore.keySet()){
+            Integer value = highScore.get(key);
+            concatString += key + ',' + value + "\n";
+        }
+        try {
+            outputFile.write(concatString);
+
+        } catch (IOException e) {
+            System.out.println("IOException: " + e);
+        }
+
+
+
+    }
+    HashMap<String,Integer> readHighScore(){
+        HashMap<String,Integer> highScore = new HashMap<>();
+        while (inputFile.hasNext()){
+            String input = inputFile.nextLine();
+            String[] line = input.split(",");
+            highScore.put(line[0], Integer.parseInt(line[1]));
+        }
+        return highScore;
     }
 
     void closeFile(Scanner inputFile) {

@@ -2,6 +2,7 @@ package com.AvCo;
 
 import javax.swing.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class GuiPanels {
@@ -10,7 +11,10 @@ public class GuiPanels {
         String name1 = "";
         String name2 = "";
         List<String> names = new ArrayList<>();
-
+        GameState gameState = new GameState();
+        HashMap<String,Integer> highScore = new HashMap<>();
+        
+        gameState.readHighScore();
         String[] high = new String[]{"Bela Katana", "Juci Nyaralo", "Apu Veddmeg"};
         String score = "<html>High score: <br><br>";
         for (String name: high) {
