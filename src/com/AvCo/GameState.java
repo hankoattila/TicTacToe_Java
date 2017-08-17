@@ -12,23 +12,12 @@ public class GameState {
     void openFile(String filename, String operation) {
         filename = "out/production/TicTacToe_Java/files/" + filename;
 
-
         try {
             if (operation.equals("read")) {
                 inputFile = new Scanner(new BufferedReader(new FileReader(filename)));
             } else if (operation.equals("write")) {
-                // Get number of saves games
                 inputFile = new Scanner(new BufferedReader(new FileReader(filename)));
-                numOfSavedGames = readFile().size();
-                closeFile(inputFile);
-
-                // New input for writing
-                inputFile = new Scanner(new BufferedReader(new FileReader(filename)));
-                if (numOfSavedGames != 0) {
-                    outputFile = new BufferedWriter(new FileWriter(filename, true));
-                } else {
-                    outputFile = new BufferedWriter(new FileWriter(filename));
-                }
+                outputFile = new BufferedWriter(new FileWriter(filename));
                 closeFile(inputFile);
             }
         } catch (Exception e) {
@@ -56,9 +45,7 @@ public class GameState {
                 addNewMap.put(keyArray[i], subList[i]);
             }
             mapList.add(addNewMap);
-
         }
-
         return mapList;
     }
 
@@ -70,7 +57,6 @@ public class GameState {
             for (String field : splitRow) {
                 oneDimensionList.add(field);
             }
-
         }
         return oneDimensionList;
     }
@@ -85,7 +71,6 @@ public class GameState {
                 addNew.add(newArray[j]);
             }
             twoDimensionList.add(addNew);
-
         }
         return twoDimensionList;
     }
@@ -104,6 +89,56 @@ public class GameState {
         } catch (IOException e) {
             System.out.println("IOException: " + e);
         }
+    }
+
+    void writeHighScore(String name, HashMap<String, Integer> highScore) {
+        if (!highScore.containsKey(name)) {
+            highScore.put(name, 1);
+        } else {
+            highScore.put(name, highScore.get(name) + 1);
+        }
+        String concatString = "";
+        for (String key : highScore.keySet()) {
+            Integer value = highScore.get(key);
+            concatString += key + ',' + value + "\n";
+        }
+        try {
+            outputFile.write(concatString);
+
+        } catch (IOException e) {
+            System.out.println("IOException: " + e);
+        }
+
+
+    }
+
+    HashMap<String, Integer> readHighScore() {
+        HashMap<String, Integer> highScore = new HashMap<>();
+        while (inputFile.hasNext()) {
+            String input = inputFile.nextLine();
+            String[] line = input.split(",");
+            highScore.put(line[0], Integer.parseInt(line[1]));
+        }
+        return highScore;
+    }
+
+    List<ArrayList<String>> topThreePlayer(HashMap<String, Integer> highScore) {
+        List<ArrayList<String>> playerArray = new ArrayList<>();
+        for (String key : highScore.keySet()) {
+            ArrayList<String> addNewPlayer = new ArrayList<>();
+            Integer value = highScore.get(key);
+            addNewPlayer.add(key);
+            addNewPlayer.add(value.toString());
+            playerArray.add(addNewPlayer);
+        }
+        playerArray.sort((p2, p1) -> p1.get(1).compareTo(p2.get(1)));
+        List<ArrayList<String>> topThree = new ArrayList<>();
+        for (int i = 0; i < playerArray.size(); i++) {
+            if (i < 3) {
+                topThree.add(playerArray.get(i));
+            }
+        }
+        return topThree;
     }
 
     void closeFile(Scanner inputFile) {

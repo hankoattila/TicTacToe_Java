@@ -2,24 +2,28 @@ package com.AvCo;
 
 import javax.swing.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-import java.awt.Dimension;
 
-public class guiPanels {
+public class GuiPanels {
 
     public static List getNames() {
         String name1 = "";
         String name2 = "";
         List<String> names = new ArrayList<>();
+        GameState gameState = new GameState();
+        gameState.openFile("highScore.txt", "read");
+        HashMap<String, Integer> highScore = new HashMap<>(gameState.readHighScore());
+        gameState.closeFile(gameState.getInputFile());
+        List<ArrayList<String>> topThree = new ArrayList<>(gameState.topThreePlayer(highScore));
 
-        String[] high = new String[]{"Bela Katana", "Juci Nyaralo", "Apu Veddmeg"};
         String score = "<html>High score: <br><br>";
-        for (String name: high) {
-            score = score + "\uD83C\uDFC6 " + name + "--> 12" + "<br>";
+        for (int i = 0; i < topThree.size(); i++) {
+            score = score + "\uD83C\uDFC6 " + topThree.get(i).get(0) + " " + topThree.get(i).get(1) + "<br>";
         }
 
-        JTextField xField = new JTextField(5);
-        JTextField yField = new JTextField(5);
+        JTextField xField = new JTextField(8);
+        JTextField yField = new JTextField(8);
         JLabel jlabel = new JLabel(score);
         JPanel myPanel = new JPanel();
         myPanel.add(new JLabel("Name 1: "));
@@ -32,7 +36,7 @@ public class guiPanels {
         myPanel.add(jlabel);
         String panelString = "Please enter your names.";
 
-        while ((name1.isEmpty() || name2.isEmpty()) || name1.equals(name2)) {
+        while (name1.isEmpty() || name2.isEmpty()) {
             int result = JOptionPane.showConfirmDialog(null, myPanel,
                     panelString, JOptionPane.OK_CANCEL_OPTION);
             if (result == JOptionPane.OK_OPTION) {
@@ -41,7 +45,7 @@ public class guiPanels {
             } else {
                 System.exit(0);
             }
-            panelString = "Use both fields & diff names.";
+            panelString = "Please fill out both fields";
         }
         names.add(name1);
         names.add(name2);
@@ -61,10 +65,10 @@ public class guiPanels {
                 gameType[0]);
 
         String actualGameType = "";
-        if(choiceNewGame == JOptionPane.YES_OPTION) {
-            actualGameType = "New game";
+        if (choiceNewGame == JOptionPane.YES_OPTION) {
+            actualGameType = "new";
         } else {
-            actualGameType = "Load game";
+            actualGameType = "load";
         }
         return actualGameType;
     }
@@ -74,7 +78,7 @@ public class guiPanels {
         int lineLength = 0;
         List<Integer> sizeLength = new ArrayList<>();
 
-        Object[] val = {"Small","Medium"};
+        Object[] val = {"Small", "Medium"};
         int choice = JOptionPane.showOptionDialog(null,
                 "Please select a table size!",
                 "Choose an option",

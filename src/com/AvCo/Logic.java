@@ -12,9 +12,7 @@ class Logic {
         this.tableSize = tableSize;
         this.lineLength = lineLength;
     }
-    
-    
-    
+
     List<List<String>> buildTable() {
 
         List<List<String>> table = new ArrayList<>();

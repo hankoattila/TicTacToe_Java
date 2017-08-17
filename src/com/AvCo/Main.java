@@ -9,21 +9,25 @@ public class Main {
 
     public static void main(String[] args) {
 
+        int tableSize = 3;
+        int lineLength = 3;
         List<String> loadTable = new ArrayList<>();
-        List<String> names = new ArrayList<>(guiPanels.getNames());
-        String gameType = guiPanels.selectType();
-        List<Integer> sizeAndLength = guiPanels.selectMode();
-        int tableSize = sizeAndLength.get(0);
-        int lineLength = sizeAndLength.get(1);
+        List<String> names = new ArrayList<>(GuiPanels.getNames());
+        String gameType = GuiPanels.selectType();
         String player1 = names.get(0);
         String player2 = names.get(1);
+        if (gameType.equals("new")) {
+            List<Integer> sizeAndLength = GuiPanels.selectMode();
+            tableSize = sizeAndLength.get(0);
+            lineLength = sizeAndLength.get(1);
+        }
 
         List<List<String>> myTable = new ArrayList<>();
-        if (gameType == "New game") {
+        if (gameType == "new") {
             Logic game = new Logic(tableSize, lineLength);
             myTable = game.buildTable();
-        } else if (gameType == "loadGame") {
-            
+        } else if (gameType == "load") {
+
             GameState gameState = new GameState();
             String filename1 = "gameState.txt";
             gameState.openFile(filename1, "read");
@@ -34,17 +38,6 @@ public class Main {
             myTable = gameState.twoDimensionTable(table.get(0).get("table"));
             loadTable = gameState.oneDimensionTable(table.get(0).get("table"));
         }
-
-        HashMap<String, Integer> highScore = new HashMap<>();
-        highScore.put("Peter", 4);
-        String name = "Gergo";
-        if (!highScore.containsKey(name)) {
-            highScore.put(name, 1);
-        } else {
-
-            highScore.put(name, highScore.get(name) + 1);
-        }
-        System.out.println(name + " " + highScore.get(name));
 
         new GUI(tableSize, myTable, lineLength, loadTable, player1, player2);
     }

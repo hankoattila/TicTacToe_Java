@@ -61,7 +61,7 @@ public class GUI {
         XOButton[] buttons = new XOButton[(tableSize * tableSize)];
         window.setResizable(false);
         for (int i = 0; i < (tableSize * tableSize); i++) {
-            buttons[i] = new XOButton(position[i], tableSize, table, lineLength);
+            buttons[i] = new XOButton(position[i], tableSize, table, lineLength, player1, player2);
             if (loadTable.size() != 0){
                 buttons[i].empty = 1;
                 if (loadTable.get(i).equals("X")) {
