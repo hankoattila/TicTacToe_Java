@@ -11,8 +11,7 @@ public class Main {
         int tableSize = 0;
         int lineLength = 0;
         int choice;
-
-
+        
         Object[] val = {"Small", "Medium"};
         choice = JOptionPane.showOptionDialog(null,
                 "Please select a table size!",
@@ -32,6 +31,7 @@ public class Main {
         } else {
             System.exit(0);
         }
+
         Logic game = new Logic(tableSize, lineLength);
         GameState gameState = new GameState();
         List<List<String>> myTable;
@@ -44,7 +44,7 @@ public class Main {
         gameState.closeFile(gameState.getInputFile());
         myTable = gameState.twoDimensionTable(table.get(0).get("table"));
         List<String> loadTable;
-        loadTable = gameState.oneDimesionTable(table.get(0).get("table"));
+        loadTable = gameState.oneDimensionTable(table.get(0).get("table"));
 
 
         new GUI(tableSize, myTable, lineLength, loadTable);

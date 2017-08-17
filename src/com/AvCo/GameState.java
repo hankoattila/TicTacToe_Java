@@ -62,7 +62,7 @@ public class GameState {
         return mapList;
     }
 
-    public List<String> oneDimesionTable(String stringTable) {
+    public List<String> oneDimensionTable(String stringTable) {
         List<String> oneDimensionList = new ArrayList<>();
         String[] splitTable = stringTable.split("@");
         for (String stringRow : splitTable) {
@@ -90,13 +90,6 @@ public class GameState {
         return twoDimensionList;
     }
 
-    void printTable(List<List<String>> table) {
-        for (List<String> row : table) {
-            String rowString = String.join(" ", row);
-
-        }
-    }
-
     void writeFile(List<List<String>> table, String player, String player2, int nextPlayer) {
         String writeString = Integer.toString(numOfSavedGames) + ":";
         List<String> tempGameStateList = new ArrayList<>();
@@ -111,34 +104,6 @@ public class GameState {
         } catch (IOException e) {
             System.out.println("IOException: " + e);
         }
-    }
-
-    List<List<String>> buildRandomTable(int tableSize) {
-        List<List<String>> table = new ArrayList<>();
-
-        for (int i = 0; i < tableSize; i++) {
-            List<String> rows = new ArrayList<>();
-            Random random = new Random();
-            String cell = null;
-
-            for (int j = 0; j < tableSize; j++) {
-                int randomInt = random.nextInt(3);
-                switch (randomInt) {
-                    case 0:
-                        cell = "-";
-                        break;
-                    case 1:
-                        cell = "O";
-                        break;
-                    case 2:
-                        cell = "X";
-                        break;
-                }
-                rows.add(cell);
-            }
-            table.add(rows);
-        }
-        return table;
     }
 
     void closeFile(Scanner inputFile) {
