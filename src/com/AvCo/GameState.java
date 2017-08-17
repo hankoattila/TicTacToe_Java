@@ -12,16 +12,10 @@ public class GameState {
     void openFile(String filename, String operation) {
         filename = "out/production/TicTacToe_Java/files/" + filename;
 
-
         try {
             if (operation.equals("read")) {
                 inputFile = new Scanner(new BufferedReader(new FileReader(filename)));
             } else if (operation.equals("write")) {
-                // Get number of saves games
-                inputFile = new Scanner(new BufferedReader(new FileReader(filename)));
-                closeFile(inputFile);
-
-                // New input for writing
                 inputFile = new Scanner(new BufferedReader(new FileReader(filename)));
                 outputFile = new BufferedWriter(new FileWriter(filename));
                 closeFile(inputFile);
@@ -51,9 +45,7 @@ public class GameState {
                 addNewMap.put(keyArray[i], subList[i]);
             }
             mapList.add(addNewMap);
-
         }
-
         return mapList;
     }
 
@@ -65,7 +57,6 @@ public class GameState {
             for (String field : splitRow) {
                 oneDimensionList.add(field);
             }
-
         }
         return oneDimensionList;
     }
@@ -80,7 +71,6 @@ public class GameState {
                 addNew.add(newArray[j]);
             }
             twoDimensionList.add(addNew);
-
         }
         return twoDimensionList;
     }

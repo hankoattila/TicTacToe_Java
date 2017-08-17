@@ -14,13 +14,13 @@ public class Main {
         List<String> loadTable = new ArrayList<>();
         List<String> names = new ArrayList<>(GuiPanels.getNames());
         String gameType = GuiPanels.selectType();
+        String player1 = names.get(0);
+        String player2 = names.get(1);
         if (gameType.equals("new")) {
             List<Integer> sizeAndLength = GuiPanels.selectMode();
             tableSize = sizeAndLength.get(0);
             lineLength = sizeAndLength.get(1);
         }
-        String player1 = names.get(0);
-        String player2 = names.get(1);
 
         List<List<String>> myTable = new ArrayList<>();
         if (gameType == "new") {
@@ -39,15 +39,6 @@ public class Main {
             loadTable = gameState.oneDimensionTable(table.get(0).get("table"));
         }
 
-        HashMap<String, Integer> highScore = new HashMap<>();
-        highScore.put("Peter", 4);
-        String name = "Gergo";
-        if (!highScore.containsKey(name)) {
-            highScore.put(name, 1);
-        } else {
-            highScore.put(name, highScore.get(name) + 1);
-        }
-        System.out.println(name + " " + highScore.get(name));
         new GUI(tableSize, myTable, lineLength, loadTable, player1, player2);
     }
 }
