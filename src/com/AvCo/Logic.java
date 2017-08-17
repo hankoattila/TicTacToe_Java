@@ -13,8 +13,6 @@ class Logic {
         this.lineLength = lineLength;
     }
     
-    
-    
     List<List<String>> buildTable() {
 
         List<List<String>> table = new ArrayList<>();
