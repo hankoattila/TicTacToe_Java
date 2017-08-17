@@ -139,6 +139,22 @@ public class GameState {
         }
         return highScore;
     }
+    List<ArrayList<String>> topThreePlayer(HashMap<String,Integer> highScore){
+        List<ArrayList<String>> playerArray = new ArrayList<>();
+        for (String key: highScore.keySet()){
+            ArrayList<String> addNewPlayer = new ArrayList<>();
+            Integer value = highScore.get(key);
+            addNewPlayer.add(key);
+            addNewPlayer.add(value.toString());
+            playerArray.add(addNewPlayer);
+        }
+        playerArray.sort((p2,p1)->p1.get(1).compareTo(p2.get(1)));
+        List<ArrayList<String>>topThree = new ArrayList<>();
+        topThree.add(playerArray.get(0));
+        topThree.add(playerArray.get(1));
+        topThree.add(playerArray.get(2));
+        return topThree;
+    }
 
     void closeFile(Scanner inputFile) {
         inputFile.close();

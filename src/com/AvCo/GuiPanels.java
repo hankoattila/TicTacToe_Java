@@ -12,9 +12,13 @@ public class GuiPanels {
         String name2 = "";
         List<String> names = new ArrayList<>();
         GameState gameState = new GameState();
-        HashMap<String,Integer> highScore = new HashMap<>();
-        
-        gameState.readHighScore();
+        gameState.openFile("highScore.txt", "read");
+        HashMap<String,Integer> highScore = new HashMap<>(gameState.readHighScore());
+        gameState.closeFile(gameState.getInputFile());
+        List<ArrayList<String>> topThree = new ArrayList<>(gameState.topThreePlayer(highScore));
+
+
+
         String[] high = new String[]{"Bela Katana", "Juci Nyaralo", "Apu Veddmeg"};
         String score = "<html>High score: <br><br>";
         for (String name: high) {

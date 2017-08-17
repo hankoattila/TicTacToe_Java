@@ -66,7 +66,6 @@ public class XOButton extends JButton implements ActionListener {
                 HashMap<String,Integer> highScore = new HashMap<>(gameState.readHighScore());
                 gameState.closeFile(gameState.getInputFile());
                 gameState.openFile("highScore.txt", "write");
-                System.out.println(highScore);
                 gameState.writeHighScore(playersNames.get(player),highScore);
                 gameState.closeFile(gameState.getOutputFile());
 
