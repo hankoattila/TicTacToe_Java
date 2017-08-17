@@ -17,7 +17,6 @@ public class GuiPanels {
         gameState.closeFile(gameState.getInputFile());
         List<ArrayList<String>> topThree = new ArrayList<>(gameState.topThreePlayer(highScore));
 
-        String[] high = new String[]{"Bela Katana", "Juci Nyaralo", "Apu Veddmeg"};
         String score = "<html>High score: <br><br>";
         for (int i = 0; i < topThree.size(); i++) {
             score = score + "\uD83D\uDC51 " + topThree.get(i).get(0) + " " + topThree.get(i).get(1) + "<br>";
