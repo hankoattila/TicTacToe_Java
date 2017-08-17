@@ -27,7 +27,7 @@ public class Main {
             Logic game = new Logic(tableSize, lineLength);
             myTable = game.buildTable();
         } else if (gameType == "load") {
-            
+
             GameState gameState = new GameState();
             String filename1 = "gameState.txt";
             gameState.openFile(filename1, "read");
@@ -38,7 +38,7 @@ public class Main {
             myTable = gameState.twoDimensionTable(table.get(0).get("table"));
             loadTable = gameState.oneDimensionTable(table.get(0).get("table"));
         }
-
+        
         HashMap<String, Integer> highScore = new HashMap<>();
         highScore.put("Peter", 4);
         String name = "Gergo";

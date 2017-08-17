@@ -13,7 +13,7 @@ public class GuiPanels {
         List<String> names = new ArrayList<>();
         GameState gameState = new GameState();
         gameState.openFile("highScore.txt", "read");
-        HashMap<String,Integer> highScore = new HashMap<>(gameState.readHighScore());
+        HashMap<String, Integer> highScore = new HashMap<>(gameState.readHighScore());
         gameState.closeFile(gameState.getInputFile());
         List<ArrayList<String>> topThree = new ArrayList<>(gameState.topThreePlayer(highScore));
 
@@ -65,7 +65,7 @@ public class GuiPanels {
                 gameType[0]);
 
         String actualGameType = "";
-        if(choiceNewGame == JOptionPane.YES_OPTION) {
+        if (choiceNewGame == JOptionPane.YES_OPTION) {
             actualGameType = "new";
         } else {
             actualGameType = "load";
@@ -78,7 +78,7 @@ public class GuiPanels {
         int lineLength = 0;
         List<Integer> sizeLength = new ArrayList<>();
 
-        Object[] val = {"Small","Medium"};
+        Object[] val = {"Small", "Medium"};
         int choice = JOptionPane.showOptionDialog(null,
                 "Please select a table size!",
                 "Choose an option",
