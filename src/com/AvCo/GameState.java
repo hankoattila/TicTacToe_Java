@@ -150,9 +150,11 @@ public class GameState {
         }
         playerArray.sort((p2,p1)->p1.get(1).compareTo(p2.get(1)));
         List<ArrayList<String>>topThree = new ArrayList<>();
-        topThree.add(playerArray.get(0));
-        topThree.add(playerArray.get(1));
-        topThree.add(playerArray.get(2));
+            for (int i = 0; i < playerArray.size(); i++) {
+                if (i < 3) {
+                    topThree.add(playerArray.get(i));
+                }
+            }
         return topThree;
     }
 
