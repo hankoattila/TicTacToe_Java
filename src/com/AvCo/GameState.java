@@ -90,7 +90,7 @@ public class GameState {
         return twoDimensionList;
     }
 
-    void writeFile(List<List<String>> table, String player, String player2, int nextPlayer) {
+    void writeFile(List<List<String>> table, String player1, String player2, int nextPlayer) {
         String writeString = Integer.toString(numOfSavedGames) + ":";
         List<String> tempGameStateList = new ArrayList<>();
         for (List<String> row : table) {
@@ -98,7 +98,7 @@ public class GameState {
 
         }
         writeString += String.join("@", tempGameStateList);
-        writeString += ':' + player + ':' + player2 + ':' + nextPlayer + "\n";
+        writeString += ':' + player1 + ':' + player2 + ':' + nextPlayer + "\n";
         try {
             outputFile.write(writeString);
         } catch (IOException e) {

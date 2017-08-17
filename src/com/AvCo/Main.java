@@ -12,7 +12,7 @@ public class Main {
         int tableSize = 0;
         int lineLength = 0;
         int choice, choiceNewGame, result;
-        String actualGameType;
+        String player1 = "", player2 = "", actualGameType;
         String[] gameType = new String[]{"New game", "Load game"};
         List<List<String>> myTable = new ArrayList<>();
         List<String> loadTable = new ArrayList<>();
@@ -30,8 +30,8 @@ public class Main {
         result = JOptionPane.showConfirmDialog(null, myPanel,
                 "Please enter your names.", JOptionPane.OK_CANCEL_OPTION);
         if (result == JOptionPane.OK_OPTION) {
-            String name1 = xField.getText();
-            String name2 = yField.getText();
+            player1 = xField.getText();
+            player2 = yField.getText();
         } else {
             System.exit(0);
         }
@@ -75,9 +75,9 @@ public class Main {
             Logic game = new Logic(tableSize, lineLength);
             myTable = game.buildTable();
         } else if (actualGameType == "loadGame") {
-
+            
             GameState gameState = new GameState();
-            String filename1 = "test.txt";
+            String filename1 = "gameState.txt";
             gameState.openFile(filename1, "read");
             List<HashMap<String, String>> table;
             table = gameState.readFile();
@@ -87,7 +87,17 @@ public class Main {
             loadTable = gameState.oneDimensionTable(table.get(0).get("table"));
         }
 
+        HashMap<String, Integer> highScore = new HashMap<>();
+        highScore.put("Peter", 4);
+        String name = "Gergo";
+        if (!highScore.containsKey(name)) {
+            highScore.put(name, 1);
+        } else {
 
-        new GUI(tableSize, myTable, lineLength, loadTable);
+            highScore.put(name, highScore.get(name) + 1);
+        }
+        System.out.println(name + " " + highScore.get(name));
+
+        new GUI(tableSize, myTable, lineLength, loadTable, player1, player2);
     }
 }

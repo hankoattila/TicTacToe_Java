@@ -11,11 +11,16 @@ public class GUI {
     int tableSize, lineLength;
     List<List<String>> table = new ArrayList<>();
     GameState gameState = new GameState();
-    String outputFile = "testWrite.txt";
+    String outputFile = "gameState.txt";
     ImageIcon X = new ImageIcon(this.getClass().getResource("XO_1.png"));
     ImageIcon O = new ImageIcon(this.getClass().getResource("XO_2.png"));
 
-    public GUI(int tableSize, List<List<String>> table, int lineLength, List<String> loadTable) {
+    public GUI(int tableSize,
+               List<List<String>> table,
+               int lineLength,
+               List<String> loadTable,
+               String player1,
+               String player2) {
 
         this.tableSize = tableSize;
         this.table = table;
@@ -44,11 +49,9 @@ public class GUI {
         JMenuItem menuItem = new JMenuItem(new AbstractAction("Save") {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                String Gergo = "test1";
-                String Attila = "test2";
                 int nextPlayer = XOButton.player;
                 gameState.openFile(outputFile, "write");
-                gameState.writeFile(table, Gergo, Attila, nextPlayer);
+                gameState.writeFile(table, player1, player2, nextPlayer);
                 gameState.closeFile(gameState.getOutputFile());
             }
         });
