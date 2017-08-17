@@ -68,7 +68,7 @@ public class Main {
 
         List<List<String>> myTable = new ArrayList<>();
         if (actualGameType == "New game") {
-            Logic game = new Logic(tableSize);
+            Logic game = new Logic(tableSize, lineLength);
             myTable = game.buildTable();
         } else {
             // Atiék cucca ide jön
