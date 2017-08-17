@@ -59,15 +59,17 @@ public class GUI {
         window.setResizable(false);
         for (int i = 0; i < (tableSize * tableSize); i++) {
             buttons[i] = new XOButton(position[i], tableSize, table, lineLength);
-            buttons[i].empty = 1;
-            if (loadTable.get(i).equals("X")) {
-                buttons[i].setIcon(X);
+            if (loadTable.size() != 0){
+                buttons[i].empty = 1;
+                if (loadTable.get(i).equals("X")) {
+                    buttons[i].setIcon(X);
 
-            } else if (loadTable.get(i).equals("O")) {
-                buttons[i].setIcon(O);
-            //
-            } else {
-                buttons[i].empty = 0;
+                } else if (loadTable.get(i).equals("O")) {
+                    buttons[i].setIcon(O);
+                    //
+                } else {
+                    buttons[i].empty = 0;
+                }
             }
             panel.add(buttons[i]);
         }

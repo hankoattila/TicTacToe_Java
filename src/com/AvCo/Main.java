@@ -11,6 +11,12 @@ public class Main {
 
         int tableSize = 0;
         int lineLength = 0;
+        int choice, choiceNewGame, result;
+        String actualGameType;
+        String[] gameType = new String[]{"New game", "Load game"};
+        List<List<String>> myTable = new ArrayList<>();
+        List<String> loadTable = new ArrayList<>();
+
 
         JTextField xField = new JTextField(8);
         JTextField yField = new JTextField(8);
@@ -21,7 +27,7 @@ public class Main {
         myPanel.add(new JLabel("Name 2: "));
         myPanel.add(yField);
 
-        int result = JOptionPane.showConfirmDialog(null, myPanel,
+        result = JOptionPane.showConfirmDialog(null, myPanel,
                 "Please enter your names.", JOptionPane.OK_CANCEL_OPTION);
         if (result == JOptionPane.OK_OPTION) {
             String name1 = xField.getText();
@@ -30,8 +36,7 @@ public class Main {
             System.exit(0);
         }
 
-        String[] gameType = new String[]{"New game", "Load game"};
-        int choiceNewGame = JOptionPane.showOptionDialog(null,
+        choiceNewGame = JOptionPane.showOptionDialog(null,
                 "Do you want to play new game or load a saved one!",
                 "Choose an option",
                 JOptionPane.YES_NO_OPTION,
@@ -40,15 +45,14 @@ public class Main {
                 gameType,
                 gameType[0]);
 
-        String actualGameType = "";
-        if(choiceNewGame == JOptionPane.YES_OPTION) {
-             actualGameType = "New game";
+        if (choiceNewGame == JOptionPane.YES_OPTION) {
+            actualGameType = "newGame";
         } else {
-            actualGameType = "Load game";
+            actualGameType = "loadGame";
         }
 
-        Object[] val = {"Small","Medium"};
-        int choice = JOptionPane.showOptionDialog(null,
+        Object[] val = {"Small", "Medium"};
+        choice = JOptionPane.showOptionDialog(null,
                 "Please select a table size!",
                 "Choose an option",
                 JOptionPane.YES_NO_OPTION,
@@ -67,24 +71,21 @@ public class Main {
             System.exit(0);
         }
 
-        List<List<String>> myTable = new ArrayList<>();
-        if (actualGameType == "New game") {
+        if (actualGameType == "newGame") {
             Logic game = new Logic(tableSize, lineLength);
             myTable = game.buildTable();
-        } else {
-            // Atiék cucca ide jön
+        } else if (actualGameType == "loadGame") {
+
+            GameState gameState = new GameState();
+            String filename1 = "test.txt";
+            gameState.openFile(filename1, "read");
+            List<HashMap<String, String>> table;
+            table = gameState.readFile();
+            XOButton.player = Integer.parseInt(table.get(0).get("nextPlayer"));
+            gameState.closeFile(gameState.getInputFile());
+            myTable = gameState.twoDimensionTable(table.get(0).get("table"));
+            loadTable = gameState.oneDimensionTable(table.get(0).get("table"));
         }
-        Logic game = new Logic(tableSize, lineLength);
-        GameState gameState = new GameState();
-        String filename1 = "test.txt";
-        gameState.openFile(filename1, "read");
-        List<HashMap<String, String>> table;
-        table = gameState.readFile();
-        XOButton.player = Integer.parseInt(table.get(0).get("nextPlayer"));
-        gameState.closeFile(gameState.getInputFile());
-        myTable = gameState.twoDimensionTable(table.get(0).get("table"));
-        List<String> loadTable;
-        loadTable = gameState.oneDimensionTable(table.get(0).get("table"));
 
 
         new GUI(tableSize, myTable, lineLength, loadTable);
