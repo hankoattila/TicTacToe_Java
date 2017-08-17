@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class guiPanels {
+public class GuiPanels {
 
     public static List getNames() {
         String name1 = "";
@@ -61,9 +61,9 @@ public class guiPanels {
 
         String actualGameType = "";
         if(choiceNewGame == JOptionPane.YES_OPTION) {
-            actualGameType = "New game";
+            actualGameType = "new";
         } else {
-            actualGameType = "Load game";
+            actualGameType = "load";
         }
         return actualGameType;
     }

@@ -10,19 +10,19 @@ public class Main {
     public static void main(String[] args) {
 
         List<String> loadTable = new ArrayList<>();
-        List<String> names = new ArrayList<>(guiPanels.getNames());
-        String gameType = guiPanels.selectType();
-        List<Integer> sizeAndLength = guiPanels.selectMode();
+        List<String> names = new ArrayList<>(GuiPanels.getNames());
+        String gameType = GuiPanels.selectType();
+        List<Integer> sizeAndLength = GuiPanels.selectMode();
         int tableSize = sizeAndLength.get(0);
         int lineLength = sizeAndLength.get(1);
         String player1 = names.get(0);
         String player2 = names.get(1);
 
         List<List<String>> myTable = new ArrayList<>();
-        if (gameType == "New game") {
+        if (gameType == "new") {
             Logic game = new Logic(tableSize, lineLength);
             myTable = game.buildTable();
-        } else if (gameType == "loadGame") {
+        } else if (gameType == "load") {
             
             GameState gameState = new GameState();
             String filename1 = "gameState.txt";
