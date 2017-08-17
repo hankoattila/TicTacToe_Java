@@ -46,7 +46,7 @@ public class XOButton extends JButton implements ActionListener {
             } else if(player == 2) {
                 sign = "X";
             } else {
-                sign = "";
+                sign = "-";
             }
 
             Logic checker = new Logic(tableSize, lineLength);
