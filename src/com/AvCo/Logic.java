@@ -18,7 +18,7 @@ class Logic {
     List<List<String>> buildTable() {
 
         List<List<String>> table = new ArrayList<>();
-        String emptyFields = "";
+        String emptyFields = "-";
 
         for (int i=0; i<tableSize; i++){
             List<String> rows = new ArrayList<>();
@@ -97,7 +97,7 @@ class Logic {
         String resultOfCrossDown = rowChecker(playerSign, crossDown);
         String resultOfCrossUp = rowChecker(playerSign, crossUp);
 
-        if(resultOfColumn == "Win" || resultOfRow == "Win" || resultOfCrossDown == "Win" || resultOfCrossUp == "Win"){
+        if(resultOfColumn.equals("Win") || resultOfRow.equals("Win") || resultOfCrossDown.equals("Win") || resultOfCrossUp.equals("Win")){
             return "Win";
         } else if(checkEmptyFieldsExist(table)){
             return "Continue";
@@ -112,7 +112,7 @@ class Logic {
         int counter = 0;
 
         for (String field: checkedList) {
-            if (field == playerSign) {
+            if (field.equals(playerSign)) {
                 counter++;
                 if (counter == lineLength) {
                     return "Win";
@@ -126,12 +126,12 @@ class Logic {
 
     private boolean checkEmptyFieldsExist(List<List<String>> table) {
 
-        String emptyField = "";
+        String emptyField = "-";
         boolean isThereEmptyField = false;
 
         for (List<String> row: table) {
             for (String field: row){
-                if (field == emptyField){
+                if (field.equals(emptyField)){
                     isThereEmptyField = true;
                 }
             }
