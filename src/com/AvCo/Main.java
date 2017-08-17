@@ -1,7 +1,6 @@
 package com.AvCo;
 
 import java.util.List;
-import java.util.Scanner;
 import javax.swing.*;
 
 public class Main {
@@ -9,6 +8,24 @@ public class Main {
     public static void main(String[] args) {
 
         int tableSize, lineLength;
+
+        JTextField xField = new JTextField(8);
+        JTextField yField = new JTextField(8);
+        JPanel myPanel = new JPanel();
+        myPanel.add(new JLabel("Name 1: "));
+        myPanel.add(xField);
+        myPanel.add(Box.createHorizontalStrut(20));
+        myPanel.add(new JLabel("Name 2: "));
+        myPanel.add(yField);
+
+        int result = JOptionPane.showConfirmDialog(null, myPanel,
+                "Please enter your names.", JOptionPane.OK_CANCEL_OPTION);
+        if (result == JOptionPane.OK_OPTION) {
+            String name1 = xField.getText();
+            String name2 = yField.getText();
+        } else {
+            System.exit(0);
+        }
 
         Object[] val = {"Small","Medium"};
         int choice = JOptionPane.showOptionDialog(null,
