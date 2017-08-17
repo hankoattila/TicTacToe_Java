@@ -23,7 +23,7 @@ public class Main {
             Logic game = new Logic(tableSize, lineLength);
             myTable = game.buildTable();
         } else if (gameType == "load") {
-            
+
             GameState gameState = new GameState();
             String filename1 = "gameState.txt";
             gameState.openFile(filename1, "read");
@@ -35,17 +35,6 @@ public class Main {
             loadTable = gameState.oneDimensionTable(table.get(0).get("table"));
         }
 
-
-        HashMap<String, Integer> highScore = new HashMap<>();
-        highScore.put("Peter", 4);
-        String name = "Gergo";
-        if (!highScore.containsKey(name)) {
-            highScore.put(name, 1);
-        } else {
-
-            highScore.put(name, highScore.get(name) + 1);
-        }
-        System.out.println(name + " " + highScore.get(name));
 
         new GUI(tableSize, myTable, lineLength, loadTable, player1, player2);
     }
