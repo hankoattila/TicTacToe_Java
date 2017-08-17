@@ -1,5 +1,6 @@
 package com.AvCo;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.*;
 
@@ -27,6 +28,23 @@ public class Main {
             System.exit(0);
         }
 
+        String[] gameType = new String[]{"New game", "Load game"};
+        int choiceNewGame = JOptionPane.showOptionDialog(null,
+                "Do you want to play new game or load a saved one!",
+                "Choose an option",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                gameType,
+                gameType[0]);
+
+        String actualGameType = "";
+        if(choiceNewGame == JOptionPane.YES_OPTION) {
+             actualGameType = "New game";
+        } else {
+            actualGameType = "Load game";
+        }
+
         Object[] val = {"Small","Medium"};
         int choice = JOptionPane.showOptionDialog(null,
                 "Please select a table size!",
@@ -44,9 +62,14 @@ public class Main {
             tableSize = 6;
             lineLength = 5;
         }
-        List<List<String>> myTable;
-        Logic game = new Logic(tableSize);
-        myTable = game.buildTable();
+
+        List<List<String>> myTable = new ArrayList<>();
+        if (actualGameType == "New game") {
+            Logic game = new Logic(tableSize);
+            myTable = game.buildTable();
+        } else {
+            // Atiék cucca ide jön
+        }
 
 	    new GUI(tableSize, myTable, lineLength);
 
