@@ -19,7 +19,7 @@ public class GuiPanels {
 
         String score = "<html>High score: <br><br>";
         for (int i = 0; i < topThree.size(); i++) {
-            score = score + "\uD83D\uDC51 " + topThree.get(i).get(0) + " " + topThree.get(i).get(1) + "<br>";
+            score = score + "\uD83C\uDFC6 " + topThree.get(i).get(0) + " " + topThree.get(i).get(1) + "<br>";
         }
 
         JTextField xField = new JTextField(8);
